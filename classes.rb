@@ -122,6 +122,14 @@ a2 = Apartment.new(2, 2000, 700, 1, 1)
 a1.add_tenant(t1)
 a1.add_tenant(t2)
 
+# Error because apartment is full
+a1.add_tenant(t3)
+# error because tb has bad credit
+a2.add_tenant(tb)
+
 b1 = Building.new("1 first st")
 b1.add_apartments(a1)
 b1.add_apartments(a2)
+
+#Error because apartment is occupied
+b1.remove_apartment_by_number(1)
