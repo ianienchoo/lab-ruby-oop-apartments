@@ -1,5 +1,5 @@
 class Building
-  attr_reader :address
+  attr_reader :address, :apartments
 
   def initialize(n_address)
     @address = n_address
@@ -11,14 +11,17 @@ class Building
   end
 
   def remove_apartment_by_number(num)
-    remaining = @apartments.reject {|apt| apt.number == num}
+    to_remove = @apartments.select {|a| a.number == num}
 
-    if (@apartments.length == remaining.length) || (apt.tenants.length != 0)
-      raise "apartment not found or apartment is occupied"
+    if (to_remove == [])
+      raise "apartment not found"
+    elsif (to_remove[0].tenants.length != 0)
+      raise "apartment not empty"
     else
-      @apartments = remaining
+      @apartments.reject! {|a| a.number == num}
     end
-    # allow to override second condition
+
+    return @apartments
   end
 
   def total_sq_footage
@@ -106,3 +109,19 @@ class Tenant
     return rating
   end
 end
+
+t1 = Tenant.new("A", 25, 780)
+t2 = Tenant.new("B", 30, 700)
+t3 = Tenant.new("C", 25, 600)
+t4 = Tenant.new("D", 25, 650)
+tb = Tenant.new("E", 25, 300)
+
+a1 = Apartment.new(1, 1000, 500, 2, 1)
+a2 = Apartment.new(2, 2000, 700, 1, 1)
+
+a1.add_tenant(t1)
+a1.add_tenant(t2)
+
+b1 = Building.new("1 first st")
+b1.add_apartments(a1)
+b1.add_apartments(a2)
