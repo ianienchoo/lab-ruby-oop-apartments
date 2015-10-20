@@ -1,3 +1,4 @@
+# Building class
 class Building
   attr_reader :address, :apartments
 
@@ -46,6 +47,7 @@ class Building
 
 end
 
+# Apartment class
 class Apartment
   attr_reader :number, :sqft, :bedrooms, :bathrooms, :tenants
   attr_accessor :rent
@@ -90,6 +92,7 @@ class Apartment
   end
 end
 
+# Tenant class
 class Tenant
   attr_accessor :credit_score
   attr_reader :name, :age
@@ -110,6 +113,7 @@ class Tenant
   end
 end
 
+# test code
 t1 = Tenant.new("A", 25, 780)
 t2 = Tenant.new("B", 30, 700)
 t3 = Tenant.new("C", 25, 600)
